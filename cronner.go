@@ -13,12 +13,12 @@ import (
 	"strings"
 
 	"github.com/PagerDuty/godspeed"
-	"github.com/codeskyblue/go-uuid"
+	uuid "github.com/codeskyblue/go-uuid"
 	"github.com/tideland/golib/logger"
 )
 
 // Version is the program's version string
-const Version = "1.0.0"
+const Version = "1.0.2amg"
 
 type cmdHandler struct {
 	gs               *godspeed.Godspeed

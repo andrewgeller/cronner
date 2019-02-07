@@ -13,7 +13,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/jessevdk/go-flags"
+	flags "github.com/jessevdk/go-flags"
 	"github.com/tideland/golib/logger"
 )
 
@@ -39,6 +39,7 @@ type binArgs struct {
 	Label       string   `short:"l" long:"label" description:"name for cron job to be used in statsd emissions and DogStatsd events. alphanumeric only; cronner will lowercase it"`
 	LogPath     string   `long:"log-path" default:"/var/log/cronner" description:"where to place the log files for command output (path for -F/--log-fail output)"`
 	LogLevel    string   `short:"L" long:"log-level" default:"error" description:"set the level at which to log at [none|error|info|debug]"`
+	MinTime     uint64   `short:"M" long:"minimum-execution-time" default:"0" description:"how long to ensure the process lasts"`
 	Namespace   string   `short:"N" long:"namespace" default:"cronner" description:"namespace for statsd emissions, value is prepended to metric name by statsd client"`
 	Passthru    bool     `short:"p" long:"passthru" description:"passthru stdout/stderr to controlling tty"`
 	Parent      bool     `short:"P" long:"use-parent" description:"if cronner invocation is runner under cronner, emit the parental values as tags"`

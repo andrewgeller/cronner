@@ -16,7 +16,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/theckman/go-flock"
+	flock "github.com/theckman/go-flock"
 	"github.com/tideland/golib/logger"
 )
 
@@ -293,6 +293,9 @@ func handleCommand(hndlr *cmdHandler) (int, []byte, float64, error) {
 		emitEvent(title, body, hndlr.opts.Label, alertType, hndlr)
 	}
 
+	if time.Duration(monotonicRtMs)*time.Millisecond < time.Duration(hndlr.opts.MinTime)*time.Second {
+		time.Sleep(time.Duration(hndlr.opts.MinTime)*time.Second - time.Duration(monotonicRtMs)*time.Millisecond)
+	}
 	// DRY: stdout/stderr has already been printed
 	if hndlr.opts.Passthru {
 		hndlr.opts.Sensitive = true

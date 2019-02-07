@@ -105,6 +105,7 @@ func (t *TestSuite) Test_binArgs_parse(c *C) {
 	c.Check(args.Lock, Equals, false)
 	c.Check(args.LogPath, Equals, "/var/log/cronner")
 	c.Check(args.LogLevel, Equals, "error")
+	c.Check(args.MinTime, Equals, uint64(0))
 	c.Check(args.Namespace, Equals, "cronner")
 	c.Check(args.Parent, Equals, false)
 	c.Check(args.Passthru, Equals, false)
@@ -130,6 +131,7 @@ func (t *TestSuite) Test_binArgs_parse(c *C) {
 		"-k",
 		"-l", "test",
 		"-L", "info",
+		"-M", "21",
 		"-N", "testcronner",
 		"-P",
 		"-p",
@@ -159,6 +161,7 @@ func (t *TestSuite) Test_binArgs_parse(c *C) {
 	c.Check(args.Lock, Equals, true)
 	c.Check(args.Label, Equals, "test")
 	c.Check(args.LogLevel, Equals, "info")
+	c.Check(args.MinTime, Equals, uint64(21))
 	c.Check(args.Namespace, Equals, "testcronner")
 	c.Check(args.Parent, Equals, true)
 	c.Check(args.Passthru, Equals, true)
@@ -189,6 +192,7 @@ func (t *TestSuite) Test_binArgs_parse(c *C) {
 		"--label", "test",
 		"--log-path", "/var/log/testcronner",
 		"--log-level", "info",
+		"--minimum-execution-time", "21",
 		"--namespace", "testcronner",
 		"--use-parent",
 		"--passthru",
@@ -216,6 +220,7 @@ func (t *TestSuite) Test_binArgs_parse(c *C) {
 	c.Check(args.Label, Equals, "test")
 	c.Check(args.LogPath, Equals, "/var/log/testcronner")
 	c.Check(args.LogLevel, Equals, "info")
+	c.Check(args.MinTime, Equals, uint64(21))
 	c.Check(args.Namespace, Equals, "testcronner")
 	c.Check(args.Parent, Equals, true)
 	c.Check(args.Passthru, Equals, true)
@@ -242,6 +247,7 @@ func (t *TestSuite) Test_binArgs_parse(c *C) {
 		"--label=test",
 		"--log-path=/var/log/testcronner",
 		"--log-level=info",
+		"--minimum-execution-time=21",
 		"--namespace=testcronner",
 		"--tag=tag1",
 		"--tag=tag2",
@@ -262,6 +268,7 @@ func (t *TestSuite) Test_binArgs_parse(c *C) {
 	c.Check(args.Label, Equals, "test")
 	c.Check(args.LogPath, Equals, "/var/log/testcronner")
 	c.Check(args.LogLevel, Equals, "info")
+	c.Check(args.MinTime, Equals, uint(21))
 	c.Check(args.Namespace, Equals, "testcronner")
 	c.Assert(args.Tags, HasLen, 2)
 	c.Check(args.Tags[0], Equals, "tag1")
